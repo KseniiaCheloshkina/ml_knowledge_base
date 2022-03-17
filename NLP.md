@@ -19,6 +19,11 @@
 - Transformers: Vaswani et al., Attention Is All You Need https://arxiv.org/abs/1706.03762
 - BERT: Devlin et al., BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding https://arxiv.org/abs/1810.0480
 
+
+### NER
+
+CRF - https://medium.com/data-science-in-your-pocket/named-entity-recognition-ner-using-conditional-random-fields-in-nlp-3660df22e95c
+
 ### Суммаризация:
 1. Цикл статей на Хабре https://habr.com/ru/post/596481/, https://habr.com/ru/post/595517/, https://habr.com/ru/post/595597/
 
