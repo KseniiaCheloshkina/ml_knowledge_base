@@ -27,7 +27,16 @@ CRF https://medium.com/@phylypo/nlp-text-segmentation-using-conditional-random-f
 External knowledge https://aclanthology.org/P18-2039.pdf
 Few Shot https://habr.com/ru/company/sberbank/blog/649609/
 NER example https://github.com/Erlemar/Erlemar.github.io/blob/master/Notebooks/ner_sberloga.ipynb
+Использование QA для few-shot NER: QaNER: Prompting Question Answering Models for Few-shot Named Entity Recognition (https://arxiv.org/abs/2203.01543), реализация - https://github.com/dayyass/QaNER
 
+О том, как делать NER модели:
+- важно иметь достаточно разметки для начала работы. Можно ориентироваться на 1 000 документов
+- хороший безйлайн - регулярки. Если что-то можно цеплять регулярками, лучше воспользоваться ими. Регулярки хорошо подходят для единообразных сущностей, тогда достаточно не так много примеров.
+- Если тексты сущностей разнообразны, необходима модель. Для BiLSTM + CharCNN + CRF нужно имного данных, больше чем для БЕРТа.
+- Очень хорошо в NER работает CRF - сглаживает острые углы (например, не дает сущностям прерываться)
+- В качестве body лучше использовать BiLSTM
+- При обучении обычно сначала делают файн-тьюн головы при замороженном эмбеддере, а потом дообучают все вместе (на каждую итерацию 5-10 эпох)
+- Если для сущностей есть иерархия (например, сущность Тип организации, подтип ЮЛ, ИП, кооператив), можно использовать two-level NER: У модели будет две головы. Первая --- стандартная, как для обычного NER, на типы (O, B/I_Entity, ...). Вторая --- только для подтипов. Вторая состоит из одного слоя для multihot-подтипов и одного для single-hot. Они отличаются только лоссом, поэтому разберем на примере single-hot. Пусть есть сущность A с подтипами a1, a2, a3, C с подтипами c1, c2 и B без подтипов. Размер слоя будет 2 (количество сущностей, имеющих подтипы) x 3 (максимальное число подтипов среди таких сущностей). Во время обучения, когда встречается метка A:a2, считается лосс для A в первой голове и лосс по a2 в первой строке тензора во второй голове (софтмакс по трем значениям). Во время предсказания вторая голова активируется, только если первая выбрала соответствующий тип.
 
 ### Суммаризация:
 1. Цикл статей на Хабре https://habr.com/ru/post/596481/, https://habr.com/ru/post/595517/, https://habr.com/ru/post/595597/
@@ -109,3 +118,7 @@ Mixup-transformer https://aclanthology.org/2020.coling-main.305/
 Synonims, translation-based https://github.com/dsfsi/textaugment
 Weighting word embeddings https://math.mit.edu/research/highschool/primes/materials/2020/Zhao-Lialin-Rumshisky.pdf
 Mixup on sentence classification https://arxiv.org/pdf/1905.08941.pdf
+
+
+### transformers
+Примеры использования - https://huggingface.co/transformers/v3.2.0/notebooks.html
