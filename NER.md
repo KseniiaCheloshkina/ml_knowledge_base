@@ -10,6 +10,9 @@
 Есть 2 направления: Extractive QA и Generative QA.
 
 QaNER: Prompting Question Answering Models for Few-shot Named Entity Recognition (https://arxiv.org/pdf/2203.01543.pdf)
+
+![QaNER](pics/qaner.png "QaNER")
+
 Реализация: https://github.com/dayyass/QaNER
 + хорош для few shot
 + решает задачу nested NER, так как запросы разделены
