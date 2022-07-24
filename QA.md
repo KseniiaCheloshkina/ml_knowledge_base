@@ -41,7 +41,18 @@ Course transformers https://huggingface.co/course/chapter6/3b?fw=pt, https://hug
 - Перед использованием можно ещё пройтись вот этой сеткой: https://github.com/google-research/language/tree/master/language/decontext
 
 ### Few Shot
+1. FewshotQA: A simple framework for few-shot learning of question answering tasks using pre-trained text-to-text models (https://arxiv.org/pdf/2109.01951.pdf) -  EMNLP 2021
+Key points:
+- For instance, (Ram et al., 2021) show that, when only 16 training examples are available, the Robertabase (Liu et al., 2019) and SpanBERT-base (Joshi
+et al., 2020) obtain a F1 score of 7.7 and 18.2 respectively on SQuAD (Rajpurkar et al., 2016). This is far lower than the F1 score of 90.3 and 92.0 when using the full training set of >100000 examples. Through experimental analysis, we observe that this degradation is majorly attributed to the disparities between fine-tuning and pre-training frameworks (a combination of the input-output design and the training objective).
+- We construct the input as a concatenation of the question, a mask token and context (in that order) and fine-tune a text-to-text pre-trained
+model using the same objective used during its pre-training to recover the answer.
+- The choice of text-to-text models in our system allows us to use to the standard encoder-decoder objective that maximizes the log likelihood of the text in the ground truth target from the output of the model.
+- From 16 to 128 fewshotBART and fewshotT5 has significant uplift compared to classic BERT, T5 and BART QA
+- Size of model makes sense - up to 0.1 F1 uplift on all sample sizes
 
+2. "Few-Shot Question Answering by Pretraining Span Selection", to appear at ACL 2021 (https://arxiv.org/pdf/2101.00438.pdf)
+Implementation: https://github.com/oriram/splinter
 
 
 ## Применение:
