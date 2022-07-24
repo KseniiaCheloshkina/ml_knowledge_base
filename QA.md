@@ -52,6 +52,7 @@ model using the same objective used during its pre-training to recover the answe
 ![qa2](pics/qa2.png "Few-shotQA-data")
 - From 16 to 128 fewshotBART and fewshotT5 has significant uplift compared to classic BERT, T5 and BART QA
 - Size of model makes sense - up to 0.1 F1 uplift on all sample sizes
+- With 16 exa,ples quality on different datasets is 50% on average
 
 2. "Few-Shot Question Answering by Pretraining Span Selection", to appear at ACL 2021 (https://arxiv.org/pdf/2101.00438.pdf)
 Implementation: https://github.com/oriram/splinter
