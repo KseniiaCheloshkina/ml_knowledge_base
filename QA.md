@@ -47,7 +47,9 @@ Key points:
 et al., 2020) obtain a F1 score of 7.7 and 18.2 respectively on SQuAD (Rajpurkar et al., 2016). This is far lower than the F1 score of 90.3 and 92.0 when using the full training set of >100000 examples. Through experimental analysis, we observe that this degradation is majorly attributed to the disparities between fine-tuning and pre-training frameworks (a combination of the input-output design and the training objective).
 - We construct the input as a concatenation of the question, a mask token and context (in that order) and fine-tune a text-to-text pre-trained
 model using the same objective used during its pre-training to recover the answer.
+![qa1](pics/qa1.png "Few-shotQA-idea")
 - The choice of text-to-text models in our system allows us to use to the standard encoder-decoder objective that maximizes the log likelihood of the text in the ground truth target from the output of the model.
+![qa2](pics/qa2.png "Few-shotQA-data")
 - From 16 to 128 fewshotBART and fewshotT5 has significant uplift compared to classic BERT, T5 and BART QA
 - Size of model makes sense - up to 0.1 F1 uplift on all sample sizes
 
