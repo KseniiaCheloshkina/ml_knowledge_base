@@ -50,7 +50,10 @@ https://in.springboard.com/blog/nlp-project-automated-question-answering-model/
 
 
 ### FAQ retrieval
-О задаче https://arxiv.org/abs/1905.02851
+Пример подхода к решению задачи FAQ (2 000 пар в FAQ) https://arxiv.org/abs/1905.02851
+
+![QA-faq](pics/qa.png "FAQ QA (localgov)")
+
 Multilingual dataset and approach https://www.researchgate.net/publication/354889556_MFAQ_a_Multilingual_FAQ_Dataset
 Multi domain https://www.researchgate.net/publication/341148105_DoQA_-_Accessing_Domain-Specific_FAQs_via_Conversational_QA
 
