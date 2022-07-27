@@ -6,5 +6,15 @@ Key points:
 
 Algorithm:
 - We assume access to a small training set T and a (typically much larger) set of unlabeled examples D
+- We define a number of `patterns P`
+![fwc](pics/fwc.png "fwc p")
+- We define a `verbalizer` that converts token to classification label
+![fwc1](pics/fwc1.png "fwc 1")
+- Then for each pattern P we train a separate MLM model that predicts at `[MASK]` position a token converted to label with the help of `verbalizer`. The loss function used is MLM loss combined with cross-entropy loss. 
+![fwc2](pics/fwc2.png "fwc 2")
+- At the next step the big unlabeled set is scored by all models/patterns separately and soft-labels are assigned by aggregation of predictions.
+- A standard classifier if trained on these soft labels which is a final model to be used.
+
+
 
 ## "Making Pre-trained Language Models Better Few-shot Learners"
