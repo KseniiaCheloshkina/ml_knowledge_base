@@ -1,6 +1,7 @@
 ## "Exploiting Cloze Questions for Few Shot Text Classification and Natural Language Inference" 
 Paper: https://aclanthology.org/2021.eacl-main.20.pdf
-Key points:
+
+Inspiration:
 - solving a task from only a few examples becomes much easier when we also have a task description, i.e., a textual explanation that helps us understand what the task is about. So far, this idea has mostly been considered in zero-shot scenarios where no training data is available at all.
 - PET works in three steps: First, for each pattern a separate PLM is finetuned on a small training set T . The ensemble of all models is then used to annotate a large unlabeled dataset D with soft labels. Finally, a standard classifier is trained on the soft-labeled dataset. 
 
@@ -15,5 +16,28 @@ Algorithm:
 - A standard classifier if trained on these soft labels which is a final model to be used.
 ![fwc](pics/fwc.png "fwc p")
 
+Conclusions:
+- Works better than classic fine-tuning (RoBERTa base compared) from 10 to 100 examples per class with score from 45% to 89% on 10 examples for different datasets
+- Have an iterative alternative iPET which is slightly performant but much slower
+- Need a big unlabeled set a hand-crafted patterns
 
 ## "Making Pre-trained Language Models Better Few-shot Learners"
+
+## Sentence embeddings and ZMap
+https://few-shot-text-classification.fastforwardlabs.com/
+
+## Induction Networks for Few-Shot Text Classification
+Paper: https://arxiv.org/pdf/1902.10482.pdf
+
+Общая идея:
+- Учимся извлекать знание о том, как из эмбеддингов саппорт сета извлечь описание класса. Основано на идее meta learning - learn several tasks (datasets) of the same type (classification). Relation Induction Networks
+Мы не пытаемся научиться разделять классы, а учимся выделять общее из саппорт сета, то есть итоговый алгоритм будет принимать на вход саппорт сет + пример для скоринга и выдавать ответ, похожи или нет
+
+Conclusions:
+- need a big dataset of similar tasks on which to pretrain model for few shot classification (for example, for a task of sentiment analysis for freezers we need labeled sentiment sets for > 10 other categories
+
+## Общие мысли
+Базовые подходы:
+1) Задача в получении эмбеддинга класса на основании маленького количества примеров (саппорт сет - набор примеров одного класса). Затем для нового примера измеряем близость до эмбеддингов классов
+
+2) Пример от Тинькофф: https://www.youtube.com/watch?v=m0zv3cRk1qA&list=PLLrf_044z4JrM_7YvA0oTgIrZMbrXYisA&index=35
