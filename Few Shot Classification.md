@@ -22,9 +22,21 @@ Conclusions:
 - Need a big unlabeled set a hand-crafted patterns
 
 ## "Making Pre-trained Language Models Better Few-shot Learners"
+Paper: https://aclanthology.org/2021.acl-long.295.pdf
+Implementation: https://github.com/princeton-nlp/LM-BFF
+Inspiration: 
+- Prompt-based prediction treats the downstream task as a (masked) language modeling problem, where the model directly generates a textual response (referred to as a label word) to a given prompt defined by a taskspecific template. We address this issue by introducing automatic prompt generation, including a pruned brute-force search to identify the best working label words, and a novel decoding objective to automatically generate templates using the generative T5 model — all of which only require the few-shot training data.
+- Inspired by GPT-3  we adopt the idea of incorporating demonstrations as additional context. We develop a more refined strategy, where, for each input, we randomly sample a single example at a time from each class to create multiple, minimal demonstration sets. We also devise a novel sampling strategy that pairs inputs with similar examples, thereby providing the model with more discriminative comparisons.
+
+Algorithm:
+- 
+
+Conclusions: 
+- only use a few annotated examples as supervision
+- experiment with RoBERTa-large and 16 training examples for each clas
 
 ## Sentence embeddings and ZMap
-https://few-shot-text-classification.fastforwardlabs.com/
+Paper: https://few-shot-text-classification.fastforwardlabs.com/
 
 ## Induction Networks for Few-Shot Text Classification
 Paper: https://arxiv.org/pdf/1902.10482.pdf
