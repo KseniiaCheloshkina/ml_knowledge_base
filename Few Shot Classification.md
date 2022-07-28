@@ -23,7 +23,9 @@ Conclusions:
 
 ## "Making Pre-trained Language Models Better Few-shot Learners"
 Paper: https://aclanthology.org/2021.acl-long.295.pdf
+
 Implementation: https://github.com/princeton-nlp/LM-BFF
+
 Inspiration: 
 - Prompt-based prediction treats the downstream task as a (masked) language modeling problem, where the model directly generates a textual response (referred to as a label word) to a given prompt defined by a taskspecific template. We address this issue by introducing automatic prompt generation, including a pruned brute-force search to identify the best working label words, and a novel decoding objective to automatically generate templates using the generative T5 model — all of which only require the few-shot training data.
 ![fsl](pics/lm_bff.png "lm_bff 1")
