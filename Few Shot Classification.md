@@ -26,7 +26,9 @@ Paper: https://aclanthology.org/2021.acl-long.295.pdf
 Implementation: https://github.com/princeton-nlp/LM-BFF
 Inspiration: 
 - Prompt-based prediction treats the downstream task as a (masked) language modeling problem, where the model directly generates a textual response (referred to as a label word) to a given prompt defined by a taskspecific template. We address this issue by introducing automatic prompt generation, including a pruned brute-force search to identify the best working label words, and a novel decoding objective to automatically generate templates using the generative T5 model — all of which only require the few-shot training data.
+![fsl](pics/lm_bff.png "lm_bff 1")
 - Inspired by GPT-3  we adopt the idea of incorporating demonstrations as additional context. We develop a more refined strategy, where, for each input, we randomly sample a single example at a time from each class to create multiple, minimal demonstration sets. We also devise a novel sampling strategy that pairs inputs with similar examples, thereby providing the model with more discriminative comparisons.
+![fsl2](pics/lm_bff1.png "lm_bff 2")
 
 Algorithm:
 - 
