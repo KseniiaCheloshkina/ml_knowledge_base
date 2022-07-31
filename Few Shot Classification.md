@@ -51,6 +51,19 @@ Conclusions:
 ## Sentence embeddings and ZMap
 Paper: https://few-shot-text-classification.fastforwardlabs.com/
 
+Algorithm:
+- We can generate an approximation, by learning a mapping between individual words in SBERT space to those same words in w2v space. We begin by selecting a large vocabulary of words (we’ll come back to this) and obtaining both SBERT and w2v representations for each one. Next, we’ll perform a least-squares linear regression with l2 regularization between the SBERT representations and the w2v representations (Z-matrix).
+![trans1](pics/trans1.png "trans1")
+- This method involves learning another mapping, this time between the documents and their labels—but we need to be careful not to overfit to our few annotated examples. One way to accomplish this is to modify the regularization term in the linear regression. Before looking at this modification, let’s take a closer look at the traditional objective function for least-squares with l2 regularization in order to get a feel for how this is accomplished. The first term essentially tells W how to match an input, X, to an output, Y. The second term we’ll modify so that elements of the weight matrix are now pushed towards the identity matrix. If we only have very few examples, W will likely be quite close to the identity matrix. This means that when we apply W to our representations, SBERT(d)ZW will be very close to SBERT(d)Z. This is exactly what we want: to rely strongly on our original representations in the face of few examples (W-matrix).
+![trans1.1](pics/trans1.1.png "trans1.1")
+- Our final classification procedure now looks like this:
+![trans2](pics/trans2.png "trans2")
+
+Conclusions:
+- For fitting matrix Z the authors found optimal vocabulary of size 20 000 - 40 000 words.
+- 
+
+
 ## Induction Networks for Few-Shot Text Classification
 Paper: https://arxiv.org/pdf/1902.10482.pdf
 
