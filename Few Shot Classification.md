@@ -50,6 +50,7 @@ Conclusions:
 
 ## Sentence embeddings and ZMap
 Paper: https://few-shot-text-classification.fastforwardlabs.com/
+Implementation: https://github.com/fastforwardlabs/few-shot-text-classification
 
 Algorithm:
 - We can generate an approximation, by learning a mapping between individual words in SBERT space to those same words in w2v space. We begin by selecting a large vocabulary of words (we’ll come back to this) and obtaining both SBERT and w2v representations for each one. Next, we’ll perform a least-squares linear regression with l2 regularization between the SBERT representations and the w2v representations (Z-matrix).
@@ -60,9 +61,19 @@ Algorithm:
 ![trans2](pics/trans2.png "trans2")
 
 Conclusions:
+- 100 examples for each label is needed for stable learning with this algorithm
 - For fitting matrix Z the authors found optimal vocabulary of size 20 000 - 40 000 words.
-- 
+- Performance was assessed at all three steps: 
+  -  based on cosine similarity between SBERT embedding of text and W2V embedding of label
+  -  + using Z-map adds + 10%
+  -  + using W-map (algorithm becomes supervised) adds + 
+- Limitation of the latent text embedding method: not only do category labels need to have semantic meaning, they also need to have specific semantic meaning to maximize the method’s utility (for example posts categories should have distinct names, and category like "funny" could be absolutely omplicates as humour appears in many posts and all these posts will by classified as "funny"). It’s not enough to have a few labeled examples for training or validation; care must be taken when deciding what the label names themselves will be. This method relies on labels laden with meaning, and that possess some semantic relationship to the text documents you wish to classify. If, for example, your labels were Label1, Label2, and Label3, this method would not work, because those labels are meaningless. In addition to being meaningful, label names should not be too general. As we saw, the words “World” and “Funny” were too broad and all-encompassing to be practical label names. 
+- The performance of the method do not increase with more data and other classic method should be considered or checked.
 
+## Lbl2vec
+Paper: Schopf, T.; Braun, D. and Matthes, F. (2021). Lbl2Vec: An Embedding-based Approach for Unsupervised Document Retrieval on Predefined Topics
+Article: https://towardsdatascience.com/unsupervised-text-classification-with-lbl2vec-6c5e040354de
+Implementation:  https://github.com/sebischair/Lbl2Vec
 
 ## Induction Networks for Few-Shot Text Classification
 Paper: https://arxiv.org/pdf/1902.10482.pdf
