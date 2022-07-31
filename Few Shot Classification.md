@@ -72,8 +72,11 @@ Conclusions:
 
 ## Lbl2vec
 Paper: Schopf, T.; Braun, D. and Matthes, F. (2021). Lbl2Vec: An Embedding-based Approach for Unsupervised Document Retrieval on Predefined Topics
+
 Article: https://towardsdatascience.com/unsupervised-text-classification-with-lbl2vec-6c5e040354de
+
 Implementation:  https://github.com/sebischair/Lbl2Vec
+
 
 ## Induction Networks for Few-Shot Text Classification
 Paper: https://arxiv.org/pdf/1902.10482.pdf
