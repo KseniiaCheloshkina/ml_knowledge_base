@@ -33,11 +33,20 @@ Inspiration:
 ![fsl2](pics/lm_bff1.png "lm_bff 2")
 
 Algorithm:
-- 
+- Auto-generate promt-like template
+- Find with LM good label names -> Get final template with label names to compose promts for LM
+- Fine-tune the MLM model + cross-entropy loss
+- If needed, add "demonstrations" - each promt is followed by pair of positive and negative examples. The authors proposed to select positive and negative pair from the similar
 
 Conclusions: 
 - only use a few annotated examples as supervision
-- experiment with RoBERTa-large and 16 training examples for each clas
+- experiment with RoBERTa-large and 16 training examples for each class. Roberta works significantly better than BERT! Used only -large versions.
+- A good option is to use prompt-based fine tuning with manual templates. Adding demonstrations and incorporating  auto generation of templates results in 1% improvement. The base approach is almost always better than standard fine-tuning 
+- it is important to clarify that LM-BFF favors certain tasks which:
+  -  (1) can be naturally posed as a “fill-in-the-blank” problem;
+  -  (2) have relatively short input sequences; 
+  -  (3) do not contain many output classes.
+  Issues (2) and (3) might be ameliorated with longer-context language models (e.g., Beltagy et al., 2020). For tasks that are not straight-forward to formulate in prompting, such as structured prediction, issue (1) is more fundamental. 
 
 ## Sentence embeddings and ZMap
 Paper: https://few-shot-text-classification.fastforwardlabs.com/
@@ -57,3 +66,5 @@ Conclusions:
 1) Задача в получении эмбеддинга класса на основании маленького количества примеров (саппорт сет - набор примеров одного класса). Затем для нового примера измеряем близость до эмбеддингов классов
 
 2) Пример от Тинькофф: https://www.youtube.com/watch?v=m0zv3cRk1qA&list=PLLrf_044z4JrM_7YvA0oTgIrZMbrXYisA&index=35
+
+3) Good baseline - fine-tuning. There are methods to decrease variance (Howard and Ruder, 2018 "Universal language model fine-tuning for text classification"; Dodge et al., 2020 "Fine-tuning pretrained language models: Weight initializations, data orders, and early stopping"; Lee et al., 2020 "Mixout: Effective regularization to finetune large-scale pretrained language models"; Zhang et al., 2021 "Revisiting fewsample BERT fine-tuning")
