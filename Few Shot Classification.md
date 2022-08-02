@@ -71,11 +71,29 @@ Conclusions:
 - The performance of the method do not increase with more data and other classic method should be considered or checked.
 
 ## Lbl2vec
-Paper: Schopf, T.; Braun, D. and Matthes, F. (2021). Lbl2Vec: An Embedding-based Approach for Unsupervised Document Retrieval on Predefined Topics
+**Paper:** Schopf, T.; Braun, D. and Matthes, F. (2021). Lbl2Vec: An Embedding-based Approach for Unsupervised Document Retrieval on Predefined Topics
 
-Article: https://towardsdatascience.com/unsupervised-text-classification-with-lbl2vec-6c5e040354de
+**Article:** https://towardsdatascience.com/unsupervised-text-classification-with-lbl2vec-6c5e040354de
 
-Implementation:  https://github.com/sebischair/Lbl2Vec
+**Implementation:**  https://github.com/sebischair/Lbl2Vec
+
+
+**Algorithm:**
+- The key idea of the algorithm is that many semantically similar keywords can represent a category.
+Steps:
+1) In the first step, the algorithm creates a joint embedding of document, and word vectors. iterative training on the interleaved PV-DBOW and Skip-gram architectures enable us to simultaneously learn word and document embedding that share the same feature space.
+2) Once documents and words are embedded in a shared vector space, the goal of the algorithm is to learn label vectors from previously manually defined keywords representing a category. Finally, the algorithm can predict the affiliation of documents to categories based on the similarities of the document vectors with the label vectors. Beginning at the document embedding with the highest cosine similarity, we now successively add each document embedding to a set of candidate document embeddings (while min number of documents in category is achieved or similarity reach threshold)
+3) To ensure a more accurate label embedding later, we now clean outliers from the resulting set of candidate document embeddings.Therefore, we apply local outlier factor (LOF) (Breunig et al., 2000) cleaning. If the LOF algorithm identifies document embeddings outlier with significantly lower local density than that of their neighbors, we remove these document embeddings. Hence, we receive the set of relevant document embeddings for topic. 
+4) Finally, we compute the centroid of all document embeddings and define this as our label embedding
+
+At prediction time, the similarity of documents to label vectors will be used to classify text documents.
+
+**Conclusion:**
+- The core of the model - model to jointly embed words and documents. Big training set is needed for fitting this model (10k in paper)
+- The authors propose the method to get keywords for each class/topic in supervised manner - Haj-Yahia et al. (2019) "Towards unsupervised text classification leveraging experts and word embeddings."
+- Using similar keywords to describe a topic yields better Lbl2Vec models 
+- No support was found for the assumption that Lbl2Vec can yield better topic models if we use more topic-related keywords, as there is insufficient evidence to infer a relationship between X1 and Y. 
+- To obtain a more precise topic representation by Lbl2Vec, we need to define topic keywords making them as dissimilar as possible to the keywords of other topics
 
 
 ## Induction Networks for Few-Shot Text Classification
