@@ -133,6 +133,7 @@ DistilBERT - 6 encoders instead of 12 encoders with teaching from BERT
 RoBERTa - optimized hyperparameters and no NSP
 ELECTRA - pretrained on the Replaced Token Detection (RTD) task (there is small LM model which replaces [MASK] token with prediction and this input is given to ELECTRA which predicts correctness of of the predicted masked tokens) 
 LaBSE - multilingual sentence embedder. The goal of training is to get similar CLS embeddings of pairs of sentences on different languages with the same meaning while using in-batch negative sampling with margin loss (https://arxiv.org/pdf/2007.01852.pdf)
-
+Difference between BERT architectures:
 https://towardsdatascience.com/everything-you-need-to-know-about-albert-roberta-and-distilbert-11a74334b2da
 https://tungmphung.com/a-review-of-pre-trained-language-models-from-bert-roberta-to-electra-deberta-bigbird-and-more/#electra
+Tokenization (BPE, WordPiece) https://towardsdatascience.com/a-comprehensive-guide-to-subword-tokenisers-4bbd3bad9a7c
