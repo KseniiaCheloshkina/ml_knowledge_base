@@ -13,7 +13,7 @@
 2. https://github.com/DanAnastasyev/DeepNLP-Course
 
 ### Основные статьи:
-- Word2Vec: Mikolov et al., Efficient Estimation of Word Representations in Vector Space https://arxiv.org/pdf/1301.3781.pdf
+- Word2Vec: Mikolov et al., Efficient Estimation of Word Representations in Vector Space https://arxiv.org/pdf/1301.3781.pdf Обьяснение: https://lilianweng.github.io/posts/2017-10-15-word-embedding/
 - FastText: Bojanowski et al., Enriching Word Vectors with Subword Information https://arxiv.org/pdf/1607.04606.pdf
 - Attention: Bahdanau et al., Neural Machine Translation by Jointly Learning to Align and Translate: https://arxiv.org/abs/1409.0473
 - Transformers: Vaswani et al., Attention Is All You Need https://arxiv.org/abs/1706.03762
@@ -65,6 +65,7 @@ https://web.stanford.edu/~jurafsky/slp3/
 
 ### Чат-боты:
 - Разработка навыков Алисы в Python https://youtu.be/VlkCJ26Gd60
+- Все о голосовых помощниках https://bblinkoff.notion.site/Voice-Assistants-7aaea02ff14441118794d0a191fadb4a
 
 ### Spacy
 Версия 2 - https://www.youtube.com/watch?v=sqDHBH9IjRU, 
