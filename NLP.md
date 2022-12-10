@@ -37,6 +37,7 @@ NER example https://github.com/Erlemar/Erlemar.github.io/blob/master/Notebooks/n
 - В качестве body лучше использовать BiLSTM
 - При обучении обычно сначала делают файн-тьюн головы при замороженном эмбеддере, а потом дообучают все вместе (на каждую итерацию 5-10 эпох)
 - Если для сущностей есть иерархия (например, сущность Тип организации, подтип ЮЛ, ИП, кооператив), можно использовать two-level NER: У модели будет две головы. Первая --- стандартная, как для обычного NER, на типы (O, B/I_Entity, ...). Вторая --- только для подтипов. Вторая состоит из одного слоя для multihot-подтипов и одного для single-hot. Они отличаются только лоссом, поэтому разберем на примере single-hot. Пусть есть сущность A с подтипами a1, a2, a3, C с подтипами c1, c2 и B без подтипов. Размер слоя будет 2 (количество сущностей, имеющих подтипы) x 3 (максимальное число подтипов среди таких сущностей). Во время обучения, когда встречается метка A:a2, считается лосс для A в первой голове и лосс по a2 в первой строке тензора во второй голове (софтмакс по трем значениям). Во время предсказания вторая голова активируется, только если первая выбрала соответствующий тип.
+- Очень хорошо работает Negative Sampling  при большом дисбалансе классов: если текст сущностей занимает 1-5% от всего текста, необходимо повысить баланс классов для модели NER, например, разбив текст на куски и обучивклассификатор наличия сущностей в тексте. Таким образом, на этапе обуения мы обучаем NER только на сегментах, предсказанных классификатором
 
 ### Суммаризация:
 1. Цикл статей на Хабре https://habr.com/ru/post/596481/, https://habr.com/ru/post/595517/, https://habr.com/ru/post/595597/
@@ -88,6 +89,9 @@ Retrieval Transformer https://habr.com/ru/post/648705/
 
 ### Sentence Similarity
 SBERT https://www.sbert.net/docs/quickstart.html#comparing-sentence-similarities
+in Information Retrieval / Semantic Search scenarios: First, you use an efficient Bi-Encoder to retrieve e.g. the top-100 most similar sentences for a query. Then, you use a Cross-Encoder to re-rank these 100 hits by computing the score for every (query, hit) combination.
+Перед использованием энкодеров - дообучение через sentence-transformers методом TSDAE модельки rubert-tiny2 на своих 1.5 млн предложениях.
+
 
 ### Aspect Extraction
 Aspects - simple CNN https://www.sentic.net/aspect-extraction-for-opinion-mining.pdf
@@ -122,3 +126,13 @@ Mixup on sentence classification https://arxiv.org/pdf/1905.08941.pdf
 
 ### transformers
 Примеры использования - https://huggingface.co/transformers/v3.2.0/notebooks.html
+transformers - 6 encoder + 6 decoder (https://arxiv.org/pdf/1706.03762.pdf)
+BERT - only encoders + segment type id + trained on MLM and NSP (CLS+SEP). base - 12 encoder blocks, 12 heads, 768 emb size, 512 seq len (https://arxiv.org/pdf/1810.04805.pdf)
+ALBERTa - shared  weights in all 12 encoders
+DistilBERT - 6 encoders instead of 12 encoders with teaching from BERT
+RoBERTa - optimized hyperparameters and no NSP
+ELECTRA - pretrained on the Replaced Token Detection (RTD) task (there is small LM model which replaces [MASK] token with prediction and this input is given to ELECTRA which predicts correctness of of the predicted masked tokens) 
+LaBSE - multilingual sentence embedder. The goal of training is to get similar CLS embeddings of pairs of sentences on different languages with the same meaning while using in-batch negative sampling with margin loss (https://arxiv.org/pdf/2007.01852.pdf)
+
+https://towardsdatascience.com/everything-you-need-to-know-about-albert-roberta-and-distilbert-11a74334b2da
+https://tungmphung.com/a-review-of-pre-trained-language-models-from-bert-roberta-to-electra-deberta-bigbird-and-more/#electra
